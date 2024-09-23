@@ -16,7 +16,7 @@ exports.registerUser = (req, res) => {
   const { username, email, password, phoneNumber } = req.body;
 
   if (!username || !email || !password || !phoneNumber) {
-    return res.status(400).json({ message: "Faltan datos" });
+    return res.status(400).json({ message: "Faltan datos por ingresar" });
   }
 
   const sql =
