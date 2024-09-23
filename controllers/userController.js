@@ -20,10 +20,11 @@ exports.registerUser = (req, res) => {
   }
 
   const sql =
-    "INSERT INTO usuario (nombre, email, contrasenia, telefono) VALUES (?, ?, ?, ?)";
+    "INSERT INTO usuario (nombre, correo, contrasena, telefono) VALUES (?, ?, ?, ?)";
 
   db.query(sql, [username, email, password, phoneNumber], (err, result) => {
     if (err) {
+      console.error("Error SQL:", err); // Añadir para depurar
       return res
         .status(500)
         .json({ message: "Error al registrar usuario", error: err });
@@ -40,7 +41,7 @@ exports.loginUser = (req, res) => {
     return res.status(400).json({ message: "Faltan datos" });
   }
 
-  const sql = "SELECT * FROM usuario WHERE nombre = ? AND contrasenia = ?";
+  const sql = "SELECT * FROM usuario WHERE nombre = ? AND contrasena = ?";
   db.query(sql, [username, password], (err, results) => {
     if (err) {
       return res
