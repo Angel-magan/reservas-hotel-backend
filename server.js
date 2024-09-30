@@ -2,8 +2,9 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const db = require("./config/db");
-const userRoutes = require("./routes/Routes");
+const userRoutes = require("./routes/userRoutes");
 const { errorHandler } = require("./middleware/errorHandler");
+const path = require("path");
 
 const app = express();
 app.use(cors());
@@ -23,6 +24,10 @@ app.use("/api/users", userRoutes);
 
 // Middleware para manejo de errores
 app.use(errorHandler);
+
+//Middleware para mostrar imagenes
+app.use(express.static(path.join(__dirname, "./imagesUser/dbImages")));
+app.use(express.static(path.join(__dirname, "./imagesUser/imagesPerfil")));
 
 // Iniciar servidor
 const PORT = process.env.PORT || 5000;
