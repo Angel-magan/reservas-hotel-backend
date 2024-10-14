@@ -3,6 +3,7 @@ const express = require("express");
 const cors = require("cors");
 const db = require("./config/db");
 const userRoutes = require("./routes/userRoutes");
+const reservaRoutes = require("./routes/reservaRoutes");
 const { errorHandler } = require("./middleware/errorHandler");
 const path = require("path");
 
@@ -21,6 +22,8 @@ db.connect((err) => {
 
 // Rutas
 app.use("/api/users", userRoutes);
+// Rutas Reservar
+app.use("/api/reserva", reservaRoutes);
 
 // Middleware para manejo de errores
 app.use(errorHandler);
