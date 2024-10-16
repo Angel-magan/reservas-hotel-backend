@@ -3,16 +3,24 @@ const db = require("../config/db");
 
 // Registrar una factura
 exports.registerPayment = (req, res) => {
-  const precio_limpieza = 10.0;
-  const precio_traveluxe = 5.0;
-
-  const { id_reserva, precio_reserva } = req.body;
+  const {
+    id_reserva,
+    precio_reserva,
+    precio_limpieza,
+    precio_traveluxe,
+    precio_total,
+  } = req.body;
 
   const numero_factura = "TVLX-" + Date.now() + "-" + id_reserva;
-  const total = precio_reserva + precio_limpieza + precio_traveluxe;
   const fecha_factura = generarDatetime();
 
-  if (!id_reserva || !precio_reserva) {
+  if (
+    !id_reserva ||
+    !precio_reserva ||
+    !precio_limpieza ||
+    !precio_traveluxe ||
+    !precio_total
+  ) {
     return res.status(400).json({ message: "Faltan datos por ingresar" });
   }
 
@@ -28,7 +36,7 @@ exports.registerPayment = (req, res) => {
       precio_reserva,
       precio_traveluxe,
       precio_limpieza,
-      total,
+      precio_total,
     ],
     (err, result) => {
       if (err) {
