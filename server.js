@@ -4,6 +4,7 @@ const cors = require("cors");
 const db = require("./config/db");
 const userRoutes = require("./routes/userRoutes");
 const reservaRoutes = require("./routes/reservaRoutes");
+const paymentRoutes = require("./routes/paymentRoutes");
 const { errorHandler } = require("./middleware/errorHandler");
 const path = require("path");
 
@@ -24,6 +25,8 @@ db.connect((err) => {
 app.use("/api/users", userRoutes);
 // Rutas Reservar
 app.use("/api/reserva", reservaRoutes);
+// Rutas de pago
+app.use("/api/payment", paymentRoutes);
 
 // Middleware para manejo de errores
 app.use(errorHandler);
